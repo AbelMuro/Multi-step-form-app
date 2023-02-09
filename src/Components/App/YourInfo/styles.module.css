@@ -23,15 +23,29 @@
     --free-months-font: "Ubuntu-Regular";
     --free-months-color: #022959;
     --free-months-font-size: 12px;
+
+    --go-back-button-color: #9699AA;
+    --go-back-button-font: "Ubuntu-Regular";
+
+    --next-step-button-bg-color: #022959;
+    --next-step-button-color: white;
+    --next-step-button-font: "Ubuntu-Regular";
 }
 
 .yourInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 512px;
+}
+
+.grid{
     display: grid;
     grid-template-columns: repeat(3, 138px);
     column-gap: 18px;
     row-gap: 32px;
     width: 450px;
-    height: 348px;
+    height: 371px;
 }
 
 .title, .desc{
@@ -71,6 +85,7 @@
 }
 
 .options div:nth-of-type(1){
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,6 +94,7 @@
 }
 
 .optionsImage{
+    flex: 1;
     width: 40px;
     height: 40px;
     justify-content: flex-start;
@@ -151,4 +167,34 @@
 
 #currentPlan{
     color: #022959;
+}
+
+.buttons{
+    width: 450px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.goBack{
+    background-color: transparent;
+    color: var(--go-back-button-color);
+    font-family: var(--go-back-button-font);
+    font-size: 16px;
+    border: none;
+}
+
+.nextStep{
+    box-sizing: border-box;
+    background-color: var(--next-step-button-bg-color);
+    color: var(--next-step-button-color);
+    font-size: var(--next-step-button-font);
+    font-size: 16px;
+    padding: 14px 24px 16px 25px;
+    border-radius: 8px;
+    width: 123px;
+    height: 48px;
+    border: none;
 }
