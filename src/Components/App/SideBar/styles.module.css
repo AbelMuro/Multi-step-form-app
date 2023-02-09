@@ -1,0 +1,75 @@
+:root{
+    --step-circle-number-font: "Ubuntu-Bold";
+
+    --step-title-font-size: 12px;
+    --step-title-font-color: #ABBCFF;
+    --step-title-font: "Ubuntu-Regular";
+
+    --step-name-font-size: 14px;
+    --step-name-font-color: white;
+    --step-name-font: "Ubuntu-Bold"
+}
+
+.steps{
+    box-sizing: border-box;
+    padding: 32px;
+    background-image: url('./images/bg-sidebar-desktop.svg');
+    width: 274px;
+    height: 568px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 32px;
+}
+
+.step{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    width: 153px;
+    height: 33px;
+}
+
+.name_title{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.stepTitle{
+    font-family: var(--step-title-font);
+    color: var(--step-title-font-color);
+    font-size: var(--step-title-font-size);
+
+}
+
+.stepName{
+    font-family: var(--step-name-font);
+    color: var(--step-name-font-color);
+    font-size: var(--step-name-font-size);
+    letter-spacing: 1px;
+}
+
+.currentCircle, .otherCircle{
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-family: var(--step-circle-number-font);
+}
+
+.currentCircle{
+    background-color: #BEE2FD;   
+    color: #022959;
+}
+
+.otherCircle{
+    border: 2px solid white;
+    color: white;
+}

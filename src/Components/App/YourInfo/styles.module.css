@@ -1,0 +1,93 @@
+:root{
+    --title-font: "Ubuntu-Bold";
+    --title-color: #022959;
+    --title-size: 32px;
+
+    --desc-font: "Ubuntu-Regular";
+    --desc-color: #9699AA;
+    --desc-size: 16px;
+
+    --options-border-color: #D6D9E6;
+
+    --options-title-font: "Ubuntu-Bold";
+    --options-title-size: 16px;
+    --options-title-color: #022959;
+
+    --options-price-font: "Ubuntu-Regular";
+    --options-price-size: 14px;
+    --options-price-color: #9699AA
+}
+
+.yourInfo{
+    display: grid;
+    grid-template-columns: repeat(3, 138px);
+    column-gap: 18px;
+    row-gap: 32px;
+    width: 450px;
+    height: 348px;
+}
+
+.title, .desc{
+    grid-column: 1/4;
+}
+
+.title{
+    font-weight: 700;
+    font-size: var(--title-size);
+    color: var(--title-color);
+    font-family: var(--title-font);
+}
+
+.desc{
+    font-weight: 400;
+    font-size: var(--desc-size);
+    color: var(--desc-color);
+    font-family: var(--desc-font);
+
+}
+
+.options{
+    border: 1px solid var(--options-border-color);
+    width: 138px;
+    height: 160px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.options div:nth-of-type(1){
+    display: flex;
+    
+}
+
+.optionsImage{
+    width: 40px;
+    height: 40px;
+    justify-content: flex-start;
+}
+
+.optionsTitle{
+    font-weight: 500;
+    font-size: var(--options-title-size);
+    font-family: var(--options-title-font);
+    color: var(--options-title-color);
+    justify-content: flex-end;
+}
+
+.optionsPrice{
+    font-size: var(--options-price-font);    
+    font-family: var(--options-price-font);
+    color: var(--options-price-color);
+    justify-content: flex-end;
+}
+
+.switchContainer{
+    grid-column: 1/4;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #F8F9FF;
+}
