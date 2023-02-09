@@ -15,7 +15,14 @@
 
     --options-price-font: "Ubuntu-Regular";
     --options-price-size: 14px;
-    --options-price-color: #9699AA
+    --options-price-color: #9699AA;
+
+    --monthly-font: "Ubuntu-Bold";
+    --yearly-font: "Ubuntu-Bold";
+
+    --free-months-font: "Ubuntu-Regular";
+    --free-months-color: #022959;
+    --free-months-font-size: 12px;
 }
 
 .yourInfo{
@@ -49,24 +56,33 @@
 .options{
     border: 1px solid var(--options-border-color);
     width: 138px;
-    height: 160px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 19px;
     box-sizing: border-box;
+    gap: 39px;
+}
+
+.options:hover{
+    border-color: #483EFF;
+    cursor: pointer;
 }
 
 .options div:nth-of-type(1){
     display: flex;
-    
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7px;
+    pointer-events: none;
 }
 
 .optionsImage{
     width: 40px;
     height: 40px;
     justify-content: flex-start;
+    pointer-events: none;
 }
 
 .optionsTitle{
@@ -75,6 +91,7 @@
     font-family: var(--options-title-font);
     color: var(--options-title-color);
     justify-content: flex-end;
+    pointer-events: none;
 }
 
 .optionsPrice{
@@ -82,6 +99,7 @@
     font-family: var(--options-price-font);
     color: var(--options-price-color);
     justify-content: flex-end;
+    pointer-events: none;
 }
 
 .switchContainer{
@@ -90,4 +108,47 @@
     height: 48px;
     border-radius: 8px;
     background-color: #F8F9FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.switch{
+    width: 38px;
+    height: 20px;
+    background-color: #022959;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.head{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: left 0.2s linear;
+    left: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.monthly, .yearly{
+    font-family: var(--monthly-font);
+    color: #9699AA;
+    font-size: 16px;
+}
+
+.freeMonths{
+    font-family: var(--free-months-font);
+    font-size: var(--free-months-font-size);
+    color: var(--free-months-color);
+    font-weight: 400;
+    pointer-events: none;
+}
+
+#currentPlan{
+    color: #022959;
 }
