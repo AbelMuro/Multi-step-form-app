@@ -1,9 +1,13 @@
 import React, {useRef, useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import styles from "./styles.module.css";
 import images from './images';
 
 
 function SelectPlan() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const switchRef = useRef();
     const monthly = useRef();
     const yearly = useRef();
@@ -11,10 +15,10 @@ function SelectPlan() {
     const [plan, setPlan] = useState("arcade")
 
 
-    const handleOptions = (e) => {
+    const handlePlan = (e) => {
         const previousOption = document.querySelector("#" + styles.optionChoosen);
         const currentOption = e.target;
-        const planChoosen = e.target.getAttribute("data-plan");
+        const planChoosen = currentOption.getAttribute("data-plan");
         previousOption.id = "";
         currentOption.id = styles.optionChoosen;
         setPlan(planChoosen);
@@ -33,6 +37,17 @@ function SelectPlan() {
         }     
    }
 
+   const handleGoBack = () => {
+        dispatch({type: "set step", step: 1});
+        navigate(-1);
+   }
+
+   const handleNextButton = () => {
+        dispatch({type: "set step", step: 3});
+        dispatch({type: "set plan", plan: plan, billing: billing})
+        navigate("/PickAddOns");
+   }
+
    useEffect(() => {
         if(billing == "yearly"){
             monthly.current.id = "";
@@ -46,10 +61,6 @@ function SelectPlan() {
         
    }, [billing])
 
-   useEffect(() => {
-        console.log(plan);
-   }, [plan])
-
 
     return(
         <section className={styles.yourInfo}>
@@ -60,7 +71,7 @@ function SelectPlan() {
                 <p className={styles.desc}>
                     You have the option of monthly or yearly billing.
                 </p>
-                <div className={styles.options} onClick={handleOptions} id={styles.optionChoosen} data-plan="arcade">
+                <div className={styles.options} onClick={handlePlan } id={styles.optionChoosen} data-plan="arcade">
                     <img src={images["arcade"]} className={styles.optionsImage} />
                     <div>
                         <h2 className={styles.optionsTitle}>
@@ -74,7 +85,7 @@ function SelectPlan() {
                         </p> : <></>}                   
                     </div>
                 </div>
-                <div className={styles.options} onClick={handleOptions} data-plan="advanced"> 
+                <div className={styles.options} onClick={handlePlan} data-plan="advanced"> 
                     <img src={images["advanced"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
@@ -88,7 +99,7 @@ function SelectPlan() {
                         </p> : <></>}                       
                     </div>
                 </div>
-                <div className={styles.options} onClick={handleOptions} data-plan="pro">
+                <div className={styles.options} onClick={handlePlan} data-plan="pro">
                     <img src={images["pro"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
@@ -118,8 +129,8 @@ function SelectPlan() {
             </div>
 
             <div className={styles.buttons}>
-                <button className={styles.goBack}>Go Back</button>
-                <button className={styles.nextStep}>Next Step</button>
+                <button className={styles.goBack} onClick={handleGoBack}>Go Back</button>
+                <button className={styles.nextStep} onClick={handleNextButton}>Next Step</button>
             </div>
         </section>
     )

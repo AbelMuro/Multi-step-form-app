@@ -4,6 +4,7 @@ import Container from './Container';
 import SelectPlan from './SelectPlan';
 import SideBar from './SideBar';
 import PersonalInfo from './PersonalInfo';
+import PickAddOns from './PickAddOns';
 import {Provider} from 'react-redux'
 import Store from './Store';
 import "./styles.css";
@@ -18,6 +19,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<PersonalInfo/>}/>
                         <Route path="/SelectPlan" element={<SelectPlan/>}/>
+                        <Route path="/PickAddOns" element={<PickAddOns/>}/>
                     </Routes>            
                 </Container>
             </BrowserRouter>            

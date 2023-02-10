@@ -1,8 +1,9 @@
-import {FormReducer, StepReducer} from "./Reducers.js";
+import {PlanReducer, PersonalInfoReducer ,StepReducer} from "./Reducers.js";
 import {combineReducers} from 'redux';
 
 const Reducer = combineReducers({
-        form: FormReducer,
+        plan: PlanReducer,
+        personalInfo: PersonalInfoReducer,
         step: StepReducer
 })
 
