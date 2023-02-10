@@ -3,15 +3,21 @@ import styles from "./styles.module.css";
 import images from './images';
 
 
-function YourInfo() {
+function SelectPlan() {
     const switchRef = useRef();
     const monthly = useRef();
     const yearly = useRef();
     const [billing, setBilling] = useState("monthly");
+    const [plan, setPlan] = useState("arcade")
 
 
     const handleOptions = (e) => {
-        console.log(e.target);
+        const previousOption = document.querySelector("#" + styles.optionChoosen);
+        const currentOption = e.target;
+        const planChoosen = e.target.getAttribute("data-plan");
+        previousOption.id = "";
+        currentOption.id = styles.optionChoosen;
+        setPlan(planChoosen);
     }
 
     const handleSwitch = () => {
@@ -40,6 +46,10 @@ function YourInfo() {
         
    }, [billing])
 
+   useEffect(() => {
+        console.log(plan);
+   }, [plan])
+
 
     return(
         <section className={styles.yourInfo}>
@@ -50,8 +60,8 @@ function YourInfo() {
                 <p className={styles.desc}>
                     You have the option of monthly or yearly billing.
                 </p>
-                <div className={styles.options} onClick={handleOptions}>
-                    <img src={images["arcade"]} className={styles.optionsImage}/>
+                <div className={styles.options} onClick={handleOptions} id={styles.optionChoosen} data-plan="arcade">
+                    <img src={images["arcade"]} className={styles.optionsImage} />
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Arcade
@@ -64,7 +74,7 @@ function YourInfo() {
                         </p> : <></>}                   
                     </div>
                 </div>
-                <div className={styles.options} onClick={handleOptions}> 
+                <div className={styles.options} onClick={handleOptions} data-plan="advanced"> 
                     <img src={images["advanced"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
@@ -73,12 +83,12 @@ function YourInfo() {
                         <p className={styles.optionsPrice}>
                             {billing == "monthly" ? "$12/mo" : "$120/yr"}  
                         </p> 
-                    {billing == "yearly" ? <p className={styles.freeMonths}>
+                        {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                       
                     </div>
                 </div>
-                <div className={styles.options} onClick={handleOptions}>
+                <div className={styles.options} onClick={handleOptions} data-plan="pro">
                     <img src={images["pro"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
@@ -115,4 +125,4 @@ function YourInfo() {
     )
 }
 
-export default YourInfo;
+export default SelectPlan;

@@ -84,6 +84,11 @@
     cursor: pointer;
 }
 
+#optionChoosen{
+    background-color: #F8F9FF;
+    border-color:#483EFF; 
+}
+
 .options div:nth-of-type(1){
     flex: 1;
     display: flex;
@@ -184,6 +189,11 @@
     font-family: var(--go-back-button-font);
     font-size: 16px;
     border: none;
+    cursor: pointer;
+}
+
+.goBack:hover{
+    color:#022959;
 }
 
 .nextStep{
@@ -197,4 +207,5 @@
     width: 123px;
     height: 48px;
     border: none;
+    cursor: pointer;
 }

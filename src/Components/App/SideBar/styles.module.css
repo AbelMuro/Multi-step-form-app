@@ -52,7 +52,7 @@
     letter-spacing: 1px;
 }
 
-.currentCircle, .otherCircle{
+.circle{
     width: 33px;
     height: 33px;
     border-radius: 100%;
@@ -62,14 +62,12 @@
     box-sizing: border-box;
     font-weight: 700;
     font-family: var(--step-circle-number-font);
-}
-
-.currentCircle{
-    background-color: #BEE2FD;   
-    color: #022959;
-}
-
-.otherCircle{
     border: 2px solid white;
     color: white;
+}
+
+#choosenCircle{                   
+    background-color: #BEE2FD;   
+    color: #022959;
+    border: none;                   /* overwritting the css properties in the classes*/
 }
