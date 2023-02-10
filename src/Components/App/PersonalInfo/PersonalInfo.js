@@ -13,7 +13,7 @@ function PersonalInfo() {
     const handleInvalid = (e) => {
         const invalidInput = e.target;
         const errorMessage = e.target.nextElementSibling;
-        invalidInput.setCustomValidity(" ");
+        invalidInput.setCustomValidity(" ");                    //this is used just to remove the default popup window that appears for invalid text fields
         invalidInput.style.borderColor = "#EE374A"
         errorMessage.style.display = "block";
     }
@@ -26,6 +26,7 @@ function PersonalInfo() {
         errorMessage.style.display = "";
     }
 
+    //this is where i left off
     const handleSubmit = (e) => {
         e.preventDefault;
         const users_name = name.current.value;
