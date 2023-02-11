@@ -39,7 +39,7 @@ function SelectPlan() {
 
    const handleGoBack = () => {
         dispatch({type: "set step", step: 1});
-        navigate(-1);
+        navigate("/");
    }
 
    const handleNextButton = () => {
