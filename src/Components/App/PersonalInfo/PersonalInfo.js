@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import Inputs from './Inputs';
@@ -13,20 +13,19 @@ function PersonalInfo() {
     const previousName = previousInfo.name;
     const previousEmail = previousInfo.email;
     const previousPhone = previousInfo.phone;
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-
-
-
+    const name = useRef();
+    const email = useRef();
+    const phone = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault;
-        dispatch({type: "set personal info" , name: name, email: email, phone: phone})
+        const users_name = name.current.value;
+        const users_email = email.current.value;
+        const users_phone = phone.current.value;
+        dispatch({type: "set personal info" , name: users_name, email: users_email, phone: users_phone})
         dispatch({type: "set step", step: 2});
         navigate("/SelectPlan");
     }
-
 
     return(
         <form className={styles.container} onSubmit={handleSubmit}>
@@ -41,13 +40,13 @@ function PersonalInfo() {
                 </div>
 
                 <div className={styles.formContainer}>
-                    <Inputs label="Name" id="name" type="text" placeholder="Vanessa" value={name} setValue={setName} />
-                    <Inputs label="Email Address" id="email" type="email" placeholder="vanessamint@someemail.com" value={email} setValue={setEmail}/>
+                    <Inputs label="Name" id="name" type="text" placeholder="Vanessa" ref={name} defaultText={previousName}/>
+                    <Inputs label="Email Address" id="email" type="email" placeholder="vanessamint@someemail.com" ref={email} defaultText={previousEmail}/>
                     <Inputs label="Phone Number" id="phone" type="tel" 
-                        pattern="(/+/ [0-9]{3} [0-9]{3} [0-9]{4})|(/+/[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{1} [0-9]{3} [0-9]{3} [0-9]{4})|([0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3} [0-9]{3} [0-9]{4})"
+                        pattern="(\+[0-9]{1} [0-9]{3} [0-9]{3} [0-9]{4})|(\+[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{1} [0-9]{3} [0-9]{3} [0-9]{4})|([0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3} [0-9]{3} [0-9]{4})"
                         placeholder="e.g +1 234 567 890"
-                        value={phone}
-                        setValue={setPhone}                         
+                        ref={phone}     
+                        defaultText={previousPhone}                   
                     />
                 </div>                
             </div>

@@ -1,24 +1,33 @@
-import React from 'react';
+import React, {useState, useRef, useEffect, useImperativeHandle, forwardRef} from 'react';
 import styles from './styles.module.css';
 
-function Inputs({label, id, type, placeholder, value, setValue , ...attrs}) {
+const Inputs = forwardRef(({label, id, type, placeholder, defaultText, ...rest}, ref)  => {
+    const [text, setText] = useState(defaultText);
+    const errorMessage = useRef();
+    const input = useRef();
 
-    const handleInvalid = (e) => {
-        const invalidInput = e.target;
-        const errorMessage = e.target.nextElementSibling;
-        invalidInput.setCustomValidity(" ");                    //i passed a space because i wanted to remove the default popup window that appears for invalid text fields
-        invalidInput.style.borderColor = "#EE374A";
-        errorMessage.style.display = "block";
+    useImperativeHandle(ref, () => ({
+        get value() {
+            return text;
+        }
+    }))
+
+    const handleInvalid = () => {
+        input.current.setCustomValidity(" ");                   
+        input.current.style.borderColor = "#EE374A";
+        errorMessage.current.style.display = "block";
     }
 
     const handleChange = (e) => {
-        const input = e.target;
-        const errorMessage = e.target.nextElementSibling;
-        input.setCustomValidity("");
-        input.style.borderColor = "";
-        errorMessage.style.display = "";
-        setValue(e.target.value);
+        setText(e.target.value)
     }
+
+    useEffect(() => {
+        input.current.setCustomValidity("");
+        input.current.style.borderColor = "";
+        errorMessage.current.style.display = "";
+
+    }, [text])
 
     return(                    
         <fieldset>
@@ -31,16 +40,17 @@ function Inputs({label, id, type, placeholder, value, setValue , ...attrs}) {
                 placeholder={placeholder} 
                 className={styles.inputs} 
                 onInvalid={handleInvalid} 
-                value={value}
+                value={text}
                 onChange={handleChange} 
-                {...attrs}
+                {...rest}
                 required 
+                ref={input}
             />
-            <p className={styles.errorMessage}>
+            <p className={styles.errorMessage} ref={errorMessage}>
                 This field is required
             </p>
         </fieldset>
     )
-}
+})
 
 export default Inputs;
