@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styles from "./styles.module.css";
 import images from './images';
 
@@ -8,32 +8,32 @@ import images from './images';
 function SelectPlan() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const previousPlan = useSelector(state => state.plan)       //in case the user clicks on 'go back' button, then we can display the previously selected options
     const switchRef = useRef();
     const monthly = useRef();
     const yearly = useRef();
-    const [billing, setBilling] = useState("monthly");
-    const [plan, setPlan] = useState("arcade")
+    const [billing, setBilling] = useState(previousPlan.billing);   
+    const [price, setPrice] = useState(previousPlan.price)
+    const [plan, setPlan] = useState(previousPlan.plan);
 
 
-    const handlePlan = (e) => {
-        const previousOption = document.querySelector("#" + styles.optionChoosen);
+    const handlePlanChange = (e) => { 
         const currentOption = e.target;
         const planChoosen = currentOption.getAttribute("data-plan");
-        previousOption.id = "";
-        currentOption.id = styles.optionChoosen;
+        const price_of_plan = currentOption.getAttribute("data-price");
+
         setPlan(planChoosen);
+        setPrice(price_of_plan);
     }
 
     const handleSwitch = () => {
-        const head = switchRef.current.querySelector("." + styles.head);
-        const currentHeadPosition = head.style.left;  
-        if(currentHeadPosition == ""){
-            head.style.left = "20px";
-            setBilling("yearly");
+        if(billing == "Monthly"){
+            setBilling("Yearly");
+            setPrice(`${price}0`);
         }          
         else {
-            head.style.left = "";
-            setBilling("monthly");
+            setBilling("Monthly");
+            setPrice(price.replace("0", ""))     
         }     
    }
 
@@ -44,22 +44,41 @@ function SelectPlan() {
 
    const handleNextButton = () => {
         dispatch({type: "set step", step: 3});
-        dispatch({type: "set plan", plan: plan, billing: billing})
+        dispatch({type: "set plan", plan: plan, billing: billing, price: price})
         navigate("/PickAddOns");
    }
 
+   //this useEffect will re-style the switch element 
    useEffect(() => {
-        if(billing == "yearly"){
+        const head = switchRef.current.querySelector("." + styles.head);
+        if(billing == "Yearly"){
             monthly.current.id = "";
-            yearly.current.id = styles.currentPlan;
+            yearly.current.id = styles.currentPlan;   
+            head.style.left = "20px";
         }
-    
-        else if(billing == "monthly"){
+        else if(billing == "Monthly"){
             monthly.current.id = styles.currentPlan;
             yearly.current.id = "";
+            head.style.left = "";
         }
-        
    }, [billing])
+
+    //styling the previously selected options, just in case the user clicks on 'go back' button
+   useEffect(() => {                        
+        const currentOption = document.querySelectorAll("." + styles.options);
+        const previousOption = document.querySelector("#" + styles.optionChoosen);
+        previousOption.id = "";
+
+        if(plan == "Arcade")
+            currentOption[0].id = styles.optionChoosen;
+        
+        else if(plan == "Advanced")
+            currentOption[1].id = styles.optionChoosen;
+        
+        else if(plan == "Pro")
+            currentOption[2].id = styles.optionChoosen;
+   }, [plan])
+
 
 
     return(
@@ -71,42 +90,42 @@ function SelectPlan() {
                 <p className={styles.desc}>
                     You have the option of monthly or yearly billing.
                 </p>
-                <div className={styles.options} onClick={handlePlan } id={styles.optionChoosen} data-plan="arcade">
+                <div className={styles.options} onClick={handlePlanChange} id={styles.optionChoosen} data-plan="Arcade" data-price={"9"}>
                     <img src={images["arcade"]} className={styles.optionsImage} />
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Arcade
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "monthly"? "$9/mo" : "$90/yr"}  
+                            {billing == "Monthly" ? "$9/mo" : "$90/yr"}  
                         </p>   
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                   
                     </div>
                 </div>
-                <div className={styles.options} onClick={handlePlan} data-plan="advanced"> 
+                <div className={styles.options} onClick={handlePlanChange} data-plan="Advanced" data-price={"12"}> 
                     <img src={images["advanced"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Advanced
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "monthly" ? "$12/mo" : "$120/yr"}  
+                            {billing == "Monthly" ? "$12/mo" : "$120/yr"}  
                         </p> 
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                       
                     </div>
                 </div>
-                <div className={styles.options} onClick={handlePlan} data-plan="pro">
+                <div className={styles.options} onClick={handlePlanChange} data-plan="Pro" data-price={"15"}>
                     <img src={images["pro"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Pro
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "monthly" ? "$15/mo" : "$150/yr"}  
+                            {billing == "Monthly" ? "$15/mo" : "$150/yr"}  
                         </p>  
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free

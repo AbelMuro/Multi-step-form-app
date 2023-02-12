@@ -7,28 +7,28 @@ export function PersonalInfoReducer(state = {name: "", email: "", phone: ""}, ac
      }
 }
 
-export function PlanReducer(state = {plan: "", billing: ""}, action){
+export function PlanReducer(state = {plan: "Arcade", billing: "Monthly", price: "9"}, action){
     switch(action.type){
        case "set plan":
-            return {plan: action.plan, billing: action.billing};
+            return {plan: action.plan, billing: action.billing, price: action.price};
        default: 
             return state;
      }
 }
 
-export function AddOnReducer(state = {onlineService: false, largerStorage: false, customizableProfile: false}, action) {
+export function AddOnReducer(state = {"Online Service" : false, "Larger Storage" : false, "Customizable Profile" : false}, action) {
      switch(action.type){
           case "set add ons":
-               return {onlineService: action.onlineService, 
-                    largerStorage: action.largerStorage, 
-                    customizableProfile: action.customizableProfile}
+               return {"Online Service": action["Online Service"], 
+                      "Larger Storage": action["Larger Storage"], 
+                      "Customizable Profile": action["Customizable Profile"]}
           default:
                return state;
      }
 }
 
+
 export function StepReducer(state = 1, action){
-     
      switch(action.type){
           case "set step": 
                return action.step;

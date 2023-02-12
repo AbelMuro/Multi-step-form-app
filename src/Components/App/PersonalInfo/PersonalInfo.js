@@ -1,6 +1,7 @@
-import React, {useRef} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import Inputs from './Inputs';
 import styles from './styles.module.css';
 
 //making this component into a controlled component might complicate things more,
@@ -8,33 +9,20 @@ import styles from './styles.module.css';
 function PersonalInfo() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const name = useRef();
-    const email = useRef();
-    const phone = useRef();
+    const previousInfo = useSelector(state => state.personalInfo);
+    const previousName = previousInfo.name;
+    const previousEmail = previousInfo.email;
+    const previousPhone = previousInfo.phone;
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
 
-    const handleInvalid = (e) => {
-        const invalidInput = e.target;
-        const errorMessage = e.target.nextElementSibling;
-        invalidInput.setCustomValidity(" ");                    //this is used just to remove the default popup window that appears for invalid text fields
-        invalidInput.style.borderColor = "#EE374A"
-        errorMessage.style.display = "block";
-    }
 
-    const handleChange = (e) => {
-        const input = e.target;
-        const errorMessage = e.target.nextElementSibling;
-        input.setCustomValidity("");
-        input.style.borderColor = "";
-        errorMessage.style.display = "";
-    }
 
-    //this is where i left off
+
     const handleSubmit = (e) => {
         e.preventDefault;
-        const users_name = name.current.value;
-        const users_email = email.current.value;
-        const users_phone = phone.current.value;
-        dispatch({type: "set personal info" , name: users_name, email: users_email, phone: users_phone})
+        dispatch({type: "set personal info" , name: name, email: email, phone: phone})
         dispatch({type: "set step", step: 2});
         navigate("/SelectPlan");
     }
@@ -53,62 +41,14 @@ function PersonalInfo() {
                 </div>
 
                 <div className={styles.formContainer}>
-                    <fieldset>
-                        <label className={styles.labels} htmlFor="name">
-                            Name
-                        </label>
-                        <input 
-                            id="name" 
-                            type="text" 
-                            placeholder="Vanessa Mint" 
-                            className={styles.inputs} 
-                            ref={name} 
-                            onInvalid={handleInvalid} 
-                            onChange={handleChange} 
-                            required 
-                        />
-                        <p className={styles.errorMessage}>
-                            This field is required
-                        </p>
-                    </fieldset>
-                    <fieldset>
-                        <label className={styles.labels} htmlFor="email">
-                            Email Address
-                        </label>
-                        <input 
-                            id="email" 
-                            type="email" 
-                            placeholder="vanessamint@someemail.com" 
-                            className={styles.inputs} 
-                            onInvalid={handleInvalid} 
-                            onChange={handleChange} 
-                            ref={email} 
-                            required
-                        />                        
-                        <p className={styles.errorMessage}>
-                            This field is required
-                        </p>
-                    </fieldset>
-                    <fieldset>
-                        <label className={styles.labels} htmlFor="phone">
-                            Phone Number
-                        </label>
-                        {/* need to fix the pattern attribute, the first two patterns in the reg exp are the problem*/}
-                        <input 
-                            id="phone" 
-                            type="tel" 
-                            pattern="(/+/ [0-9]{3} [0-9]{3} [0-9]{4})|(/+/[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{1} [0-9]{3} [0-9]{3} [0-9]{4})|([0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3} [0-9]{3} [0-9]{4})" 
-                            placeholder="e.g +1 234 567 890" 
-                            className={styles.inputs} 
-                            onInvalid={handleInvalid} 
-                            onChange={handleChange} 
-                            ref={phone} 
-                            required
-                        />                        
-                        <p className={styles.errorMessage}>
-                            This field is required
-                        </p>
-                    </fieldset>
+                    <Inputs label="Name" id="name" type="text" placeholder="Vanessa" value={name} setValue={setName} />
+                    <Inputs label="Email Address" id="email" type="email" placeholder="vanessamint@someemail.com" value={email} setValue={setEmail}/>
+                    <Inputs label="Phone Number" id="phone" type="tel" 
+                        pattern="(/+/ [0-9]{3} [0-9]{3} [0-9]{4})|(/+/[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{1} [0-9]{3} [0-9]{3} [0-9]{4})|([0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3}[0-9]{3}[0-9]{4})|([0-9]{3} [0-9]{3} [0-9]{4})"
+                        placeholder="e.g +1 234 567 890"
+                        value={phone}
+                        setValue={setPhone}                         
+                    />
                 </div>                
             </div>
 

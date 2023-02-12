@@ -200,12 +200,16 @@
     box-sizing: border-box;
     background-color: var(--next-step-button-bg-color);
     color: var(--next-step-button-color);
-    font-size: var(--next-step-button-font);
     font-size: 16px;
+    font-family: var(--next-step-button-font);
     padding: 14px 24px 16px 25px;
     border-radius: 8px;
     width: 123px;
     height: 48px;
     border: none;
     cursor: pointer;
+}
+
+.nextStep:hover{
+    background-color: #164A8A;
 }

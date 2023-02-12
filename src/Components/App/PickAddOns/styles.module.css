@@ -142,7 +142,12 @@
     cursor: pointer;
 }
 
+.goBackButton{
+    color: #022959;
+}
+
 .nextStepButton{
+    border: none;
     width: 123px;
     height: 48px;
     border-radius: 8px;
@@ -151,6 +156,10 @@
     font-family: var(--next-step-font);
     font-size: 16px;
     cursor: pointer;
+}
+
+.nextStepButton:hover{
+    background-color: #164A8A
 }
 
 .additionalCost{

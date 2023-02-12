@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import{useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
 
 function PickAddOns() {
-    const [onlineService, setOnlineService] = useState(false);
-    const [largerStorage, setLargerStorage] = useState(false);
-    const [customizableProfile, setCustomizableProfile] = useState(false);
+    const previousAddOns = useSelector(state => state.AddOn);                                   //in case the user clicks on 'go back' button
+    const [onlineService, setOnlineService] = useState(previousAddOns["Online Service"]);           //by default, the value will be false on all three object keys
+    const [largerStorage, setLargerStorage] = useState(previousAddOns["Larger Storage"]);
+    const [customizableProfile, setCustomizableProfile] = useState(previousAddOns["Customizable Profile"]);
     const billing = useSelector(state => state.plan.billing);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,6 +15,17 @@ function PickAddOns() {
     const handleGoBack = () => {
         dispatch({type: "set step", step: 2});
         navigate("/SelectPlan");
+    }
+
+    const handleSubmit = () => {
+        dispatch({type: "set step", step: 4});
+        dispatch({
+            type: "set add ons", 
+            "Online Service": onlineService, 
+            "Larger Storage": largerStorage, 
+            "Customizable Profile": customizableProfile
+        });
+        navigate("/Summary");
     }
 
     const handleOnlineService = () => {
@@ -28,30 +40,39 @@ function PickAddOns() {
         setCustomizableProfile(!customizableProfile);
     }
 
-    const handleCheck = (e) => {
-        const addOn = e.target.parentElement;
-        const isChecked = e.target.checked;
+    const changeStyling = (element, state) => {
+        if(state){
+            element.style.borderColor = "#483EFF";
+            element.style.backgroundColor = "#F8F9FF";
+        }
+        else {
+            element.style.borderColor = "";
+            element.style.backgroundColor = "";            
+        }
 
-        if(isChecked){
-            addOn.style.borderColor = "#483EFF"
-            addOn.style.backgroundColor = "#F8F9FF";
-        }
-        else{
-            addOn.style.borderColor = "";
-            addOn.style.backgroundColor = "";
-        }
     }
 
-    const handleSubmit = () => {
-        dispatch({type: "set step", step: 4});
-        dispatch({
-            type: "set add ons", 
-            onlineService: onlineService, 
-            largerStorage: largerStorage, 
-            customizableProfile: customizableProfile
-        });
-        navigate("/Summary");
-    }
+
+    useEffect(() => {
+        const onlineServiceElement = document.querySelector("#onlineService");
+        const AddOn_Container = onlineServiceElement.parentElement;
+        changeStyling(AddOn_Container, onlineService);        
+            
+    }, [onlineService])
+
+    useEffect(() => {
+        const largerStorageElement = document.querySelector("#largerStorage");
+        const AddOn_Container = largerStorageElement.parentElement;
+        changeStyling(AddOn_Container, largerStorage)
+        
+    }, [largerStorage])
+
+    useEffect(() => {
+        const customizableProfileElement = document.querySelector("#customizableProfile");
+        const AddOn_Container = customizableProfileElement.parentElement;
+        changeStyling(AddOn_Container, customizableProfile)
+            
+    }, [customizableProfile])
 
     return(
         <form className={styles.container} onSubmit={handleSubmit}>
@@ -66,7 +87,14 @@ function PickAddOns() {
                 </div>
                 <div className={styles.addOns}>
                     <div className={styles.addOn}>
-                        <input type="checkbox" id="onlineService" className={styles.checkboxes} onClick={handleCheck} value={onlineService} onChange={handleOnlineService}/>
+                        <input 
+                            type="checkbox" 
+                            id="onlineService" 
+                            className={styles.checkboxes}
+                            value={onlineService} 
+                            onChange={handleOnlineService} 
+                            checked={onlineService} 
+                            />
                         <label className={styles.labelContainer} htmlFor="onlineService">
                             <h2 className={styles.labelTitle}>
                                 Online service
@@ -76,11 +104,18 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "monthly" ? "+$1/mo" : "+$10/yr"}
+                            {billing == "Monthly" ? "+$1/mo" : "+$10/yr"}
                         </div>
                     </div>
                     <div className={styles.addOn}>
-                        <input type="checkbox" id="largerStorage" className={styles.checkboxes} onClick={handleCheck} value={largerStorage} onChange={handleLargerStorage}/>
+                        <input 
+                            type="checkbox" 
+                            id="largerStorage" 
+                            className={styles.checkboxes} 
+                            value={largerStorage}
+                            onChange={handleLargerStorage} 
+                            checked={largerStorage} 
+                            />
                         <label className={styles.labelContainer} htmlFor="largerStorage">
                             <h2 className={styles.labelTitle}>
                                 Larger storage
@@ -90,11 +125,18 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "monthly" ? "+$2/mo" : "+$20/yr"}
+                            {billing == "Monthly" ? "+$2/mo" : "+$20/yr"}
                         </div>
                     </div>
                     <div className={styles.addOn}>
-                        <input type="checkbox" id="customizableProfile" className={styles.checkboxes} onClick={handleCheck} value={customizableProfile} onChange={handleCustomizableProfile}/>
+                        <input 
+                            type="checkbox" 
+                            id="customizableProfile" 
+                            className={styles.checkboxes} 
+                            value={customizableProfile}
+                            onChange={handleCustomizableProfile} 
+                            checked={customizableProfile} 
+                            />
                         <label className={styles.labelContainer} htmlFor="customizableProfile">
                             <h2 className={styles.labelTitle}>
                                 Customizable profile
@@ -104,7 +146,7 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "monthly" ? "+$2/mo" : "+$20/yr"}
+                            {billing == "Monthly" ? "+$2/mo" : "+$20/yr"}
                         </div>
                     </div>
                 </div>
