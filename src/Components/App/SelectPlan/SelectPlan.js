@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState, useLayoutEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from "./styles.module.css";
@@ -10,6 +10,7 @@ function SelectPlan() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const previousPlan = useSelector(state => state.plan)       //in case the user clicks on 'go back' button, then we can display the previously selected options
+    const grid = useRef();
     const switchRef = useRef();
     const monthly = useRef();
     const yearly = useRef();
@@ -18,7 +19,6 @@ function SelectPlan() {
     const [arcade, setArcade] = useState(prices["Arcade Monthly"]);
     const [advanced, setAdvanced] = useState(prices["Advanced Monthly"]);
     const [pro, setPro] = useState(prices["Pro Monthly"]);
-    console.log(typeof(prices));
 
     const handlePlanChange = (e) => { 
         const currentOption = e.target;
@@ -55,7 +55,7 @@ function SelectPlan() {
    }, [])
 
    //this useEffect will re-style the switch element 
-   useEffect(() => {
+   useLayoutEffect(() => {
         const head = switchRef.current.querySelector("." + styles.head);
         if(billing == "Yearly"){
             monthly.current.id = "";
@@ -68,6 +68,9 @@ function SelectPlan() {
             head.style.left = "";
         }
    }, [billing])
+
+
+   
 
     //this useEffect will re-style the currently selected subscription option (arcade, advanced, pro)
    useEffect(() => {                        
@@ -89,7 +92,7 @@ function SelectPlan() {
 
     return(
         <section className={styles.yourInfo}>
-            <div className={styles.grid}>
+            <div className={styles.grid} ref={grid}>
                 <h1 className={styles.title}>
                     Select your plan
                 </h1>
@@ -105,7 +108,7 @@ function SelectPlan() {
                         <p className={styles.optionsPrice}>
                             {billing == "Monthly" ? `$${arcade}/mo` : `$${arcade}/yr`}  
                         </p>   
-                        {billing == "yearly" ? <p className={styles.freeMonths}>
+                        {billing == "Yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                   
                     </div>
@@ -119,7 +122,7 @@ function SelectPlan() {
                         <p className={styles.optionsPrice}>
                             {billing == "Monthly" ? `$${advanced}/mo` : `$${advanced}/yr`}  
                         </p> 
-                        {billing == "yearly" ? <p className={styles.freeMonths}>
+                        {billing == "Yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                       
                     </div>
@@ -133,7 +136,7 @@ function SelectPlan() {
                         <p className={styles.optionsPrice}>
                             {billing == "Monthly" ? `$${pro}/mo` : `$${pro}/yr`}  
                         </p>  
-                        {billing == "yearly" ? <p className={styles.freeMonths}>
+                        {billing == "Yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                         
                     </div>
