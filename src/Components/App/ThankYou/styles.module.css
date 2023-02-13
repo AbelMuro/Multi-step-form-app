@@ -1,0 +1,28 @@
+.container{
+    width: 450px;
+    height: 238px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thankYouIcon{
+    width: 80px;
+    height: 80px;
+
+}
+
+.title{
+    color: #022959;
+    font-size: 32px;
+    font-family: "Ubuntu-Bold"
+}
+
+.desc{
+    color: #9699AA;
+    font-family: "Ubuntu-Regular";
+    font-size: 16px;
+    text-align: center;
+    line-height: 25px;
+}

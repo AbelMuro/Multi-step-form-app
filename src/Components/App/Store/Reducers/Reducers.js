@@ -7,10 +7,10 @@ export function PersonalInfoReducer(state = {name: "", email: "", phone: ""}, ac
      }
 }
 
-export function PlanReducer(state = {plan: "Arcade", billing: "Monthly", price: "9"}, action){
+export function PlanReducer(state = {plan: "Arcade", billing: "Monthly"}, action){
     switch(action.type){
        case "set plan":
-            return {plan: action.plan, billing: action.billing, price: action.price};
+            return {plan: action.plan, billing: action.billing};
        default: 
             return state;
      }
@@ -25,6 +25,16 @@ export function AddOnReducer(state = {"Online Service" : false, "Larger Storage"
           default:
                return state;
      }
+}
+
+export function TotalReducer(state = 0, action){
+     switch(action.type){
+          case "set total":
+               return action.total;
+          default: 
+               return state;
+     }
+
 }
 
 

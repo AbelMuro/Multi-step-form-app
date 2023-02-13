@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 450px;
     height: 512px;
 }
 
@@ -64,7 +65,6 @@
     font-size: var(--desc-size);
     color: var(--desc-color);
     font-family: var(--desc-font);
-
 }
 
 .options{
@@ -212,4 +212,25 @@
 
 .nextStep:hover{
     background-color: #164A8A;
+}
+
+@media(max-width: 970px){
+    .yourInfo, .grid{
+        width: 400px;
+    }
+
+    .grid{
+        grid-template-columns: repeat(3, 120px);
+        row-gap: 20px;
+    }
+
+    .options{
+        width: 100px;
+        padding: 10px;
+        margin: auto;
+    }
+
+    .switchContainer, .buttons, .title, .desc{
+        width: 400px;
+    }
 }

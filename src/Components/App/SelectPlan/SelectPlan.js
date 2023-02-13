@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from "./styles.module.css";
 import images from './images';
+import prices from './../Prices';
 
 
 function SelectPlan() {
@@ -13,40 +14,45 @@ function SelectPlan() {
     const monthly = useRef();
     const yearly = useRef();
     const [billing, setBilling] = useState(previousPlan.billing);   
-    const [price, setPrice] = useState(previousPlan.price)
     const [plan, setPlan] = useState(previousPlan.plan);
-
+    const [arcade, setArcade] = useState(prices["Arcade Monthly"]);
+    const [advanced, setAdvanced] = useState(prices["Advanced Monthly"]);
+    const [pro, setPro] = useState(prices["Pro Monthly"]);
+    console.log(typeof(prices));
 
     const handlePlanChange = (e) => { 
         const currentOption = e.target;
         const planChoosen = currentOption.getAttribute("data-plan");
-        const price_of_plan = currentOption.getAttribute("data-price");
-
         setPlan(planChoosen);
-        setPrice(price_of_plan);
     }
 
     const handleSwitch = () => {
         if(billing == "Monthly"){
+            setArcade(prices["Arcade Yearly"]);
+            setAdvanced(prices["Advanced Yearly"]);
+            setPro(prices["Pro Yearly"]);
             setBilling("Yearly");
-            setPrice(`${price}0`);
         }          
         else {
-            setBilling("Monthly");
-            setPrice(price.replace("0", ""))     
+            setArcade(prices["Arcade Monthly"]);
+            setAdvanced(prices["Advanced Monthly"]);
+            setPro(prices["Pro Monthly"]);
+            setBilling("Monthly"); 
         }     
    }
 
    const handleGoBack = () => {
-        dispatch({type: "set step", step: 1});
         navigate("/");
    }
 
    const handleNextButton = () => {
-        dispatch({type: "set step", step: 3});
-        dispatch({type: "set plan", plan: plan, billing: billing, price: price})
+        dispatch({type: "set plan", plan: plan, billing: billing})
         navigate("/PickAddOns");
    }
+
+   useEffect(() => {
+        dispatch({type: "set step", step: 2});
+   }, [])
 
    //this useEffect will re-style the switch element 
    useEffect(() => {
@@ -63,7 +69,7 @@ function SelectPlan() {
         }
    }, [billing])
 
-    //styling the previously selected options, just in case the user clicks on 'go back' button
+    //this useEffect will re-style the currently selected subscription option (arcade, advanced, pro)
    useEffect(() => {                        
         const currentOption = document.querySelectorAll("." + styles.options);
         const previousOption = document.querySelector("#" + styles.optionChoosen);
@@ -90,42 +96,42 @@ function SelectPlan() {
                 <p className={styles.desc}>
                     You have the option of monthly or yearly billing.
                 </p>
-                <div className={styles.options} onClick={handlePlanChange} id={styles.optionChoosen} data-plan="Arcade" data-price={"9"}>
+                <div className={styles.options} onClick={handlePlanChange} id={styles.optionChoosen} data-plan="Arcade">
                     <img src={images["arcade"]} className={styles.optionsImage} />
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Arcade
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "Monthly" ? "$9/mo" : "$90/yr"}  
+                            {billing == "Monthly" ? `$${arcade}/mo` : `$${arcade}/yr`}  
                         </p>   
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                   
                     </div>
                 </div>
-                <div className={styles.options} onClick={handlePlanChange} data-plan="Advanced" data-price={"12"}> 
+                <div className={styles.options} onClick={handlePlanChange} data-plan="Advanced"> 
                     <img src={images["advanced"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Advanced
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "Monthly" ? "$12/mo" : "$120/yr"}  
+                            {billing == "Monthly" ? `$${advanced}/mo` : `$${advanced}/yr`}  
                         </p> 
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free
                         </p> : <></>}                       
                     </div>
                 </div>
-                <div className={styles.options} onClick={handlePlanChange} data-plan="Pro" data-price={"15"}>
+                <div className={styles.options} onClick={handlePlanChange} data-plan="Pro">
                     <img src={images["pro"]} className={styles.optionsImage}/>
                     <div>
                         <h2 className={styles.optionsTitle}>
                             Pro
                         </h2>
                         <p className={styles.optionsPrice}>
-                            {billing == "Monthly" ? "$15/mo" : "$150/yr"}  
+                            {billing == "Monthly" ? `$${pro}/mo` : `$${pro}/yr`}  
                         </p>  
                         {billing == "yearly" ? <p className={styles.freeMonths}>
                             2 months free

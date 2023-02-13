@@ -5,7 +5,8 @@ function Container({children}) {
     return(        
         <section className={styles.container}>
             {children}
-        </section>)    
+        </section>
+    )    
 }
 
 export default Container;

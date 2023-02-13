@@ -14,12 +14,16 @@
     box-sizing: border-box;
     padding: 32px;
     background-image: url('./images/bg-sidebar-desktop.svg');
+    background-position: center;
+    background-size: cover;
     width: 274px;
     height: 568px;
+    transition: width 0.2s linear, height 0.2s linear;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 32px;
+    border-radius: 10px;
 }
 
 .step{
@@ -70,4 +74,26 @@
     background-color: #BEE2FD;   
     color: #022959;
     border: none;                   /* overwritting the css properties in the classes*/
+}
+
+@media(max-width: 970px){
+    .steps{
+        width: 240px;
+    }
+}
+
+@media(max-width: 720px){
+    .steps{
+        width: 100%;
+        border-radius: 0px;
+        height: 172px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+    }
+    .step{
+        justify-content: center;
+        width: 33px;
+    }
+
 }

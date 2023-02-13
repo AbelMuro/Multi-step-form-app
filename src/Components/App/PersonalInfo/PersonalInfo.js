@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import Inputs from './Inputs';
@@ -23,9 +23,12 @@ function PersonalInfo() {
         const users_email = email.current.value;
         const users_phone = phone.current.value;
         dispatch({type: "set personal info" , name: users_name, email: users_email, phone: users_phone})
-        dispatch({type: "set step", step: 2});
         navigate("/SelectPlan");
     }
+
+    useEffect(() => {
+        dispatch({type: "set step", step: 1});
+    }, [])
 
     return(
         <form className={styles.container} onSubmit={handleSubmit}>

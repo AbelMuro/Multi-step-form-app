@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import{useNavigate} from 'react-router-dom';
 import styles from './styles.module.css';
+import prices from './../Prices';
 
 function PickAddOns() {
-    const previousAddOns = useSelector(state => state.AddOn);                                   //in case the user clicks on 'go back' button
+    const previousAddOns = useSelector(state => state.AddOn);                                       //in case the user clicks on 'go back' button
     const [onlineService, setOnlineService] = useState(previousAddOns["Online Service"]);           //by default, the value will be false on all three object keys
     const [largerStorage, setLargerStorage] = useState(previousAddOns["Larger Storage"]);
     const [customizableProfile, setCustomizableProfile] = useState(previousAddOns["Customizable Profile"]);
@@ -13,12 +14,10 @@ function PickAddOns() {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        dispatch({type: "set step", step: 2});
         navigate("/SelectPlan");
     }
 
     const handleSubmit = () => {
-        dispatch({type: "set step", step: 4});
         dispatch({
             type: "set add ons", 
             "Online Service": onlineService, 
@@ -49,8 +48,11 @@ function PickAddOns() {
             element.style.borderColor = "";
             element.style.backgroundColor = "";            
         }
-
     }
+
+    useEffect(() => {
+        dispatch({type: "set step", step: 3});
+    }, [])
 
 
     useEffect(() => {
@@ -104,7 +106,7 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "Monthly" ? "+$1/mo" : "+$10/yr"}
+                            {billing == "Monthly" ? `+$${prices["Online Service Monthly"]}/mo` : `+$${prices["Online Service Yearly"]}/yr`}
                         </div>
                     </div>
                     <div className={styles.addOn}>
@@ -125,7 +127,7 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "Monthly" ? "+$2/mo" : "+$20/yr"}
+                            {billing == "Monthly" ? `+$${prices["Larger Storage Monthly"]}/mo` : `+$${prices["Larger Storage Yearly"]}/yr`}
                         </div>
                     </div>
                     <div className={styles.addOn}>
@@ -146,7 +148,7 @@ function PickAddOns() {
                             </p>
                         </label>
                         <div className={styles.additionalCost}>
-                            {billing == "Monthly" ? "+$2/mo" : "+$20/yr"}
+                            {billing == "Monthly" ? `+$${prices["Customizable Profile Monthly"]}/mo` : `+$${prices["Customizable Profile Yearly"]}/yr`}
                         </div>
                     </div>
                 </div>
