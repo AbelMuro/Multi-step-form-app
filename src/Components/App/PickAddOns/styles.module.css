@@ -31,6 +31,7 @@
     justify-content: space-between;
     width: 450px;
     height: 512px;
+    transition: width 0.2s linear;
 }
 
 .content{
@@ -39,6 +40,9 @@
     justify-content: space-between;
     width: 100%;
     height: 383px;
+    position: relative;
+    top: 0px;
+    transition: top 0.2s linear;
 }
 
 .header{
@@ -87,7 +91,8 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    top: 30px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 24px;
     margin: 0px;
     cursor: pointer;
@@ -142,7 +147,7 @@
     cursor: pointer;
 }
 
-.goBackButton{
+.goBackButton:hover{
     color: #022959;
 }
 
@@ -170,4 +175,64 @@
     top: 50%;
     transform: translateY(-50%);
     right: 24px;
+}
+
+@media(max-width: 970px){
+    .container{
+        width: 343px;
+    }
+}
+
+@media(max-width: 720px){
+    .content{
+        box-sizing: border-box;
+        height: 383px;
+        background-color: white;
+        padding: 32px 24px 32px 24px;
+        border-radius: 10px;
+        justify-content: flex-start;
+        gap: 22px;
+        top: -120px;
+    }
+    .addOns{
+        height: 220px;
+    }
+    .addOn{
+        width: 295px;
+        height: 62px;
+    }
+    .header{
+        height: 87px;
+        gap: 9px;
+    }
+    .checkboxes{
+        left: 16px; 
+    }
+
+    .labelContainer{
+        height: 39px;
+        left: 52px;
+    }
+
+    .labelTitle{
+        font-size: 14px;
+    }
+
+    .labelDesc{
+        font-size: 12px;
+    }
+
+    .additionalCost{
+        right: 16px;
+    }
+    .buttons{
+        position: absolute;
+        box-sizing: border-box;
+        height: auto;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: white;
+        padding: 16px;
+    }
 }

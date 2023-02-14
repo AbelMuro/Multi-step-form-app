@@ -40,6 +40,7 @@ function PickAddOns() {
     }
 
     const changeStyling = (element, state) => {
+        //this function is used by the useEffects below
         if(state){
             element.style.borderColor = "#483EFF";
             element.style.backgroundColor = "#F8F9FF";

@@ -31,8 +31,9 @@ function Summary() {
         dispatch({type: "set step", step: 4});
     }, [])
 
+    //calculating total price
     useEffect(() => {
-        let basePrice = prices[`${planChoice} ${billing}`]
+        let basePrice = prices[`${planChoice} ${billing}`]        
         Object.entries(AddOns).forEach((addOn) => {
             const key = addOn[0];
             const value = addOn[1];

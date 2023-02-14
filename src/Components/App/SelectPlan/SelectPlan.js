@@ -55,11 +55,12 @@ function SelectPlan() {
         navigate("/PickAddOns");
    }
 
+   //this useEffect will set the current step to 2
    useEffect(() => {
         dispatch({type: "set step", step: 2});
    }, [])
 
-   //this useEffect will re-style the switch element 
+   //this useEffect will re-style some elements in the DOM
    useEffect(() => {
         if(billing == "Yearly"){
             grid.current.style.height = mobile ? "566px" : "";                      //we will only change the height of this element when the viewport is in mobile
@@ -82,7 +83,6 @@ function SelectPlan() {
    }, [billing])
 
 
-   
 
     //this useEffect will re-style the currently selected subscription option (arcade, advanced, pro)
    useEffect(() => {                        

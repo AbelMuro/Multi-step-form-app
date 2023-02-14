@@ -5,12 +5,17 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    top: 0px;
+    transition: top 0.2s linear;
 }
 
 .thankYouIcon{
     width: 80px;
     height: 80px;
-
+    position: relative;
+    top: 0px;
+    transition: top 0.2s linear;
 }
 
 .title{
@@ -25,4 +30,24 @@
     font-size: 16px;
     text-align: center;
     line-height: 25px;
+}
+
+@media(max-width: 720px){
+    .container{
+        width: 343px;
+        height: 400px;
+        background-color: white;
+        border-radius: 10px;
+        justify-content: center;
+        gap: 9px;
+        top: -120px;
+    }
+
+    .thankYouIcon{
+        top: -19px;
+    }
+    .desc{
+        width: 295px;
+    }
+
 }

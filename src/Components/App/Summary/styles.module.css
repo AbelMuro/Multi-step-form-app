@@ -1,39 +1,6 @@
 :root{
-    --title-font: 'Ubuntu-Bold';
-    --title-color: #022959;
-
-    --desc-font: "Ubuntu-Regular";
-    --desc-color: #9699AA;
-
-    --options-container-bg-color: #F8F9FF;
-
-    --plan-title-font: "Ubuntu-Regular";
-    --plan-title-color: #022959;
-
-    --change-link-font: "Ubuntu-Regular";
-    --change-link-color: #9699AA;
-
-    --basic-price-font: "Ubuntu-Bold";
-    --basic-price-color: #022959;
-
-    --add-on-title-font: "Ubuntu-Regular";
-    --add-on-title-color: #9699AA;
-
-    --add-on-price-font: "Ubuntu-Regular";
-    --add-on-price-color: #022959;
-
-    --total-title-font: "Ubuntu-Regular";
-    --total-title-color: #9699AA;
-
-    --total-price-font: "Ubuntu-Bold";
-    --total-price-color: #483EFF;
-
-    --go-back-font: "Ubuntu-Regular";
-    --go-back-color: #9699AA;
-
-    --confirm-bg-color: #483EFF;
-    --confirm-font: "Ubuntu-Regular";
-    --confirm-color: white;
+    --bold-font: 'Ubuntu-Bold';
+    --regular-font: 'Ubuntu-Regular';
 
 }
 
@@ -50,8 +17,12 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;    
-    height: 336px;
+    height: auto;
+    position: relative;
+    top: 0px;
+    transition: height 0.2s linear, top 0.2s linear;
     gap: 40px;
+    box-sizing: border-box;
 }
 
 .header{
@@ -60,27 +31,29 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    line-height: 25px;
 }
 
 .title{
-    color: var(--title-color);
-    font-family: var(--title-font);
+    color: #022959;
+    font-family: var(--bold-font);
     font-size: 32px;
 }
 
 .desc{
-    color: var(--desc-color);
-    font-family: var(--desc-font);
+    color: #9699AA;
+    font-family: var(--regular-font);
 }
 
 .allOptionsChoosen{
     width: 100%;
     padding: 24px 16px 0px 16px;
     box-sizing: border-box;
-    background-color: var(--options-container-bg-color); 
+    background-color: #F8F9FF;
     border-radius: 8px;
     position: relative;
 }
+
 .currentPlan{
     position: relative;
     width: 100%;
@@ -92,15 +65,15 @@
 }
 
 .planTitle{
-    font-family: var(--plan-title-font);
-    color: var(--plan-title-color);
+    font-family: var(--regular-font);
+    color: #022959;
     font-size: 16px;
 }
 
 .change{
     width: 60px;
-    color: var(--change-link-color);
-    font-family: var(--change-link-font);
+    color: #9699AA;
+    font-family: var(--regular-font);
     font-size: 14px;
     text-decoration: underline;
     cursor: pointer;
@@ -111,8 +84,8 @@
 }
 
 .price{
-    font-family: var(--basic-price-font);
-    color: var(--basic-price-color);
+    font-family: var(--bold-font);
+    color: #022959;
     font-size: 16px;
     position: absolute;
     top: 50%;
@@ -136,14 +109,14 @@
 }
 
 .addOnTitle{
-    font-family: var(--add-on-title-font);
-    color: var(--add-on-title-color);
+    font-family: var(--regular-font);
+    color: #9699AA;
     font-size: 14px;
 }
 
 .addOnPrice{
-    font-family: var(--add-on-price-font);
-    color: var(--add-on-price-color);
+    font-family: var(--regular-font);
+    color: #022959;
     font-size: 14px;
 }
 
@@ -161,14 +134,14 @@
 }
 
 .totalTitle{
-    font-family: var(--total-title-font);
-    color: var(--total-title-color);
+    font-family: var(--regular-font);
+    color: #9699AA;
     font-size: 14px;
 }
 
 .totalPrice{
-    font-family: var(--total-price-font);
-    color: var(--total-price-color);
+    font-family: var(--bold-font);
+    color: #483EFF;
     font-size: 20px;
 }
 
@@ -182,8 +155,8 @@
 .goBackButton{
     background-color: transparent;
     border: none;
-    color: var(--go-back-color);
-    font-family: var(--go-back-font);
+    color: #9699AA;
+    font-family: var(--regular-font);
     font-size: 16px;
     cursor: pointer;
 }
@@ -196,9 +169,9 @@
     width: 123px;
     height: 48px;
     border: none;
-    color: var(--confirm-color);
-    background-color: var(--confirm-bg-color);
-    font-family: var(--confirm-font);
+    color: white;
+    background-color: #483EFF;
+    font-family: var(--regular-font);
     border-radius: 8px;
     cursor: pointer;
 }
@@ -206,4 +179,35 @@
 
 .confirmButton:hover{
     background-color: #928CFF;
+}
+
+@media(max-width: 970px){
+    .container, .content{
+        width: 343px;
+    }
+
+    .header{
+        height: 87px;
+    }   
+}
+
+@media(max-width: 720px){
+    .content{
+        background-color: white;
+        padding: 32px 24px 76px 24px;
+        border-radius: 10px;
+        top: -120px;
+    }
+
+    .buttons{
+        background-color: white;
+        padding: 16px;
+        height: 72px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+
 }
