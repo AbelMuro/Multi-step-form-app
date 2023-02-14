@@ -1,9 +1,3 @@
-:root{
-    --bold-font: 'Ubuntu-Bold';
-    --regular-font: 'Ubuntu-Regular';
-
-}
-
 .container{
     display: flex;
     flex-direction: column;

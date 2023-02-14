@@ -1,23 +1,4 @@
-:root{
-    --title-font: "Ubuntu-Bold";
-    --desc-font: "Ubuntu-Regular";
 
-    --next-button-font: "Ubuntu-Regular";
-    --next-button-bg-color: #164A8A;
-
-    --labels-font: "Ubuntu-Regular";
-    --labels-color: #022959;
-
-    --input-border-color: #D6D9E6;
-    --input-text-color: #022959;
-
-    --input-font: "Ubuntu-Bold";
-    --input-placeholder-font: "Ubuntu-Regular";
-    --input-focus-border-color: #483EFF;
-
-    --error-message-color: #EE374A;
-    --error-message-font: "Ubuntu-Bold"
-}
 
 .container{
     display: flex;
@@ -52,12 +33,12 @@
 }
 
 .title{
-    font-family: var(--title-font);
+    font-family: var(--bold-font);
     font-size: 32px;
 }
 
 .desc{
-    font-family: var(--desc-font);
+    font-family: var(--regular-font);
     font-size: 16px;
     color: #9699AA
 }
@@ -78,13 +59,13 @@
 }
 
 .nextButton{
-    background-color: var(--next-button-bg-color);
+    background-color: #164A8A;
     border: none;
     border-radius: 8px;
     color: white;
     width: 123px;
     height: 48px;
-    font-family: var(--next-button-font);
+    font-family: var(--regular-font);
     font-size: 16px;
     cursor: pointer;
 }

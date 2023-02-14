@@ -13,6 +13,12 @@
     src: url("./../FontFiles/Ubuntu-Regular.ttf");
 }
 
+:root{
+    --bold-font: 'Ubuntu-Bold';
+    --medium-font: 'Ubuntu-Medium';
+    --regular-font: 'Ubuntu-Regular';
+}
+
 body{
     margin: 0px;
     background-color: #EFF5FF;

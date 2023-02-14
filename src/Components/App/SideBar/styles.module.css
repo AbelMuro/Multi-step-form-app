@@ -1,14 +1,4 @@
-:root{
-    --step-circle-number-font: "Ubuntu-Bold";
 
-    --step-title-font-size: 12px;
-    --step-title-font-color: #ABBCFF;
-    --step-title-font: "Ubuntu-Regular";
-
-    --step-name-font-size: 14px;
-    --step-name-font-color: white;
-    --step-name-font: "Ubuntu-Bold"
-}
 
 .steps{
     box-sizing: border-box;
@@ -43,16 +33,16 @@
 }
 
 .stepTitle{
-    font-family: var(--step-title-font);
-    color: var(--step-title-font-color);
-    font-size: var(--step-title-font-size);
+    font-family: var(--regular-font);
+    color: #ABBCFF;
+    font-size: 12px;
 
 }
 
 .stepName{
-    font-family: var(--step-name-font);
-    color: var(--step-name-font-color);
-    font-size: var(--step-name-font-size);
+    font-family: var(--bold-font);
+    color: white;
+    font-size: 14px;
     letter-spacing: 1px;
 }
 
@@ -65,7 +55,7 @@
     align-items: center;
     box-sizing: border-box;
     font-weight: 700;
-    font-family: var(--step-circle-number-font);
+    font-family: var(--bold-font);
     border: 2px solid white;
     color: white;
 }

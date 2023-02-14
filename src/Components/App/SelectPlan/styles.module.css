@@ -1,36 +1,3 @@
-:root{
-    --title-font: "Ubuntu-Bold";
-    --title-color: #022959;
-    --title-size: 32px;
-
-    --desc-font: "Ubuntu-Regular";
-    --desc-color: #9699AA;
-    --desc-size: 16px;
-
-    --options-border-color: #D6D9E6;
-
-    --options-title-font: "Ubuntu-Bold";
-    --options-title-size: 16px;
-    --options-title-color: #022959;
-
-    --options-price-font: "Ubuntu-Regular";
-    --options-price-size: 14px;
-    --options-price-color: #9699AA;
-
-    --monthly-font: "Ubuntu-Bold";
-    --yearly-font: "Ubuntu-Bold";
-
-    --free-months-font: "Ubuntu-Regular";
-    --free-months-color: #022959;
-    --free-months-font-size: 12px;
-
-    --go-back-button-color: #9699AA;
-    --go-back-button-font: "Ubuntu-Regular";
-
-    --next-step-button-bg-color: #022959;
-    --next-step-button-color: white;
-    --next-step-button-font: "Ubuntu-Regular";
-}
 
 .yourInfo{
     display: flex;
@@ -70,20 +37,20 @@
 
 .title{
     font-weight: 700;
-    font-size: var(--title-size);
-    color: var(--title-color);
-    font-family: var(--title-font);
+    font-size: 32px;
+    color: #022959;
+    font-family: var(--bold-font);
 }
 
 .desc{
     font-weight: 400;
-    font-size: var(--desc-size);
-    color: var(--desc-color);
-    font-family: var(--desc-font);
+    font-size: 16px;
+    color: #9699AA;
+    font-family: var(--regular-font);
 }
 
 .options{
-    border: 1px solid var(--options-border-color);
+    border: 1px solid #D6D9E6;
     width: 138px;
     border-radius: 8px;
     display: flex;
@@ -121,17 +88,17 @@
 
 .optionsTitle{
     font-weight: 500;
-    font-size: var(--options-title-size);
-    font-family: var(--options-title-font);
-    color: var(--options-title-color);
+    font-size: 16px;
+    font-family: var(--bold-font);
+    color: #022959;
     justify-content: flex-end;
     pointer-events: none;
 }
 
 .optionsPrice{
-    font-size: var(--options-price-font);    
-    font-family: var(--options-price-font);
-    color: var(--options-price-color);
+    font-size: 14px;    
+    font-family: var(--regular-font);
+    color: #9699AA;
     justify-content: flex-end;
     pointer-events: none;
 }
@@ -170,15 +137,15 @@
 }
 
 .monthly, .yearly{
-    font-family: var(--monthly-font);
+    font-family: var(--bold-font);
     color: #9699AA;
     font-size: 16px;
 }
 
 .freeMonths{
-    font-family: var(--free-months-font);
-    font-size: var(--free-months-font-size);
-    color: var(--free-months-color);
+    font-family: var(--regular-font);
+    font-size: 12px;
+    color: #022959;
     font-weight: 400;
     pointer-events: none;
 }
@@ -198,8 +165,8 @@
 
 .goBack{
     background-color: transparent;
-    color: var(--go-back-button-color);
-    font-family: var(--go-back-button-font);
+    color: #9699AA;
+    font-family: var(--regular-font);
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -211,10 +178,10 @@
 
 .nextStep{
     box-sizing: border-box;
-    background-color: var(--next-step-button-bg-color);
-    color: var(--next-step-button-color);
+    background-color: #022959;
+    color: white;
     font-size: 16px;
-    font-family: var(--next-step-button-font);
+    font-family: var(--regular-font);
     padding: 14px 24px 16px 25px;
     border-radius: 8px;
     width: 123px;
