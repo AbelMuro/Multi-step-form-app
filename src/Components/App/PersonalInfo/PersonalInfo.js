@@ -18,7 +18,7 @@ function PersonalInfo() {
     const phone = useRef();
 
     const handleSubmit = (e) => {
-        e.preventDefault;
+        e.preventDefault();
         const users_name = name.current.value;
         const users_email = email.current.value;
         const users_phone = phone.current.value;

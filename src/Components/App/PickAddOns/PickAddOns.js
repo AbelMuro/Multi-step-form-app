@@ -17,7 +17,8 @@ function PickAddOns() {
         navigate("/SelectPlan");
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         dispatch({
             type: "set add ons", 
             "Online Service": onlineService, 
