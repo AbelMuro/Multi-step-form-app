@@ -55,6 +55,10 @@ function Summary() {
                 console.log(message);
                 navigate("/ThankYou");   
             }
+            else{
+                const error = await response.text();
+                console.log(error);
+            }
            
         }
         catch(error){
