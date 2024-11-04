@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {ClipLoader} from "react-spinners";
 import {useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles.module.css';
@@ -7,11 +8,14 @@ import prices from './../Prices';
 function Summary() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [total, setTotal] = useState("");
+    const [total, setTotal] = useState(0);
+    const [loading, setLoading] = useState(false);
     const plan = useSelector(state => state.plan);
+    const AddOns = useSelector(state => state.AddOn);    
+    const personalInfo = useSelector(state => state.personalInfo);
     const planChoice = plan.plan;
     const billing = plan.billing;
-    const AddOns = useSelector(state => state.AddOn);
+
 
     const handleGoBack = () => {
         dispatch({type: "set step", step: 3});
@@ -22,9 +26,43 @@ function Summary() {
         navigate("/SelectPlan");
     }
 
-    const handleConfirm = () => {
-        dispatch({type: "set total", total: total});
-        navigate("/ThankYou");
+    const handleConfirm = async () => {
+        setLoading(true);
+        try{
+            const name = personalInfo.name;
+            const email = personalInfo.email;
+            const phone = personalInfo.phone;
+
+            const newSub = {
+                name,
+                email,
+                phone,
+                addOns: AddOns,
+                billing,
+                total
+            }
+
+            const response = await fetch('http://localhost:4000/create_subscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newSub)
+            })
+
+            if(response.status === 200){
+                const message = await response.text();
+                console.log(message);
+                navigate("/ThankYou");   
+            }
+           
+        }
+        catch(error){
+            console.log(error.message);
+        }
+        finally{
+            setLoading && setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -99,7 +137,7 @@ function Summary() {
                     Go Back
                 </button>
                 <button className={styles.confirmButton} onClick={handleConfirm}>
-                    Confirm
+                    {loading ? <ClipLoader size='25px' color='white'/> : 'Confirm'}
                 </button>
             </div>
         </section>
