@@ -42,7 +42,7 @@ function Summary() {
                 total
             }
 
-            const response = await fetch('https://multi-step-form-server-40980e838ab0.herokuapp.com/create_subscription', {
+            const response = await fetch('https://multi-step-form-server.netlify.app/create_subscription', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
